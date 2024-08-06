@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/wallpaper-clock-style-games/static/css/main.c04350cf.css",
-    "main.js": "/wallpaper-clock-style-games/static/js/main.e41d0ae4.js",
+    "main.js": "/wallpaper-clock-style-games/static/js/main.8e4d3a11.js",
     "index.html": "/wallpaper-clock-style-games/index.html",
     "main.c04350cf.css.map": "/wallpaper-clock-style-games/static/css/main.c04350cf.css.map",
-    "main.e41d0ae4.js.map": "/wallpaper-clock-style-games/static/js/main.e41d0ae4.js.map"
+    "main.8e4d3a11.js.map": "/wallpaper-clock-style-games/static/js/main.8e4d3a11.js.map"
   },
   "entrypoints": [
     "static/css/main.c04350cf.css",
-    "static/js/main.e41d0ae4.js"
+    "static/js/main.8e4d3a11.js"
   ]
 }
