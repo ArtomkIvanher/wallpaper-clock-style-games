@@ -1,50 +1,70 @@
 import React, { useState, useEffect } from 'react';
 import './Cards.scss';
 
-const imageCount = 10; // Кількість зображень у папці
-const totalCards = 10 * 5; // Загальна кількість карток
-const allImages = Array.from({ length: imageCount }, (_, i) => `/images/img${i + 1}.jpg`);
+const totalCards = 10 * 6; // Загальна кількість карток
 
-const getRandomImages = (count) => {
-  const images = [];
-  for (let i = 0; i < count; i++) {
-    const randomIndex = Math.floor(Math.random() * allImages.length);
-    images.push(allImages[randomIndex]);
+const getRandomImages = (images, count) => {
+  console.log("Total images available: ", images.length);
+  let shuffled = [...images].sort(() => 0.5 - Math.random());
+  while (shuffled.length < count) {
+    shuffled = shuffled.concat(shuffled.slice(0, count - shuffled.length));
   }
-  return images;
+  console.log("Shuffled images: ", shuffled);
+  return shuffled.slice(0, count);
 };
 
 const Cards = () => {
   const [images, setImages] = useState([]);
+  const [allImages, setAllImages] = useState([]);
 
   useEffect(() => {
-    setImages(getRandomImages(totalCards));
+    // Завантаження JSON файлу
+    fetch('/images.json')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Images data from JSON: ", data.images);
+        setAllImages(data.images); // Витягування масиву зображень з об'єкта
+        const randomImages = getRandomImages(data.images, totalCards);
+        console.log("Random images: ", randomImages);
+        setImages(randomImages);
+      })
+      .catch((error) => {
+        console.error('Error loading images:', error);
+      });
   }, []);
 
+  useEffect(() => {
+    console.log("Updated images state: ", images);
+  }, [images]);
+
   const rows = [];
-  for (let i = 0; i < 5; i++) {
-    rows.push(images.slice(i * 10, (i + 1) * 10));
+  for (let i = 0; i < 6; i++) {
+    const row = images.slice(i * 10, (i + 1) * 10);
+    console.log(`Row ${i}: `, row);
+    rows.push(row);
   }
+
+  console.log("Rows: ", rows);
 
   return (
     <div className="cards-wrapper">
       <div className="cards-container">
         {rows.map((row, rowIndex) => (
-          <div className="cards-row" key={rowIndex}>
-            {row.map((image, index) => (
-              <div className="card" key={index}>
+          <div className={`cards-row cards-row-${rowIndex}`} key={rowIndex}>
+            {row.length > 0 && row.map((image, index) => (
+              <div className="card" key={`${rowIndex}-${index}`}>
                 <img src={image} alt={`Random ${rowIndex}-${index}`} />
               </div>
             ))}
             {/* Дублікація ряду для анімації */}
-            {row.map((image, index) => (
-              <div className="card" key={`duplicate-${index}`}>
+            {row.length > 0 && row.map((image, index) => (
+              <div className="card" key={`duplicate-${rowIndex}-${index}`}>
                 <img src={image} alt={`Duplicate ${rowIndex}-${index}`} />
               </div>
             ))}
-            {row.map((image, index) => (
-              <div className="card" key={`duplicate-${index}`}>
-                <img src={image} alt={`Duplicate ${rowIndex}-${index}`} />
+            {row.length > 0 && row.map((image, index) => (
+              <div className="card" key={`duplicate2-${rowIndex}-${index}`}>
+                <img src={image} alt={`Duplicate2 ${rowIndex}-${index}`} />
               </div>
             ))}
           </div>

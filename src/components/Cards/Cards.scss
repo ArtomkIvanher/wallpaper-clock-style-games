@@ -1,7 +1,7 @@
 .cards-wrapper {
-  perspective: 1000px;
+  perspective: 100vw;
   position: relative;
-  top: -600px;
+  top: -400px;
 }
 
 .cards-container {
@@ -20,13 +20,31 @@
   width: 300vw; /* Встановлює ширину рядків */
   display: flex;
   gap: 1vw;
-  animation: moveUp 10s linear infinite;
   transform-style: preserve-3d; /* Забезпечує 3D ефект для дочірніх елементів */
+}
+
+.cards-row-0{
+  animation: anim_row 22s linear infinite;
+}
+.cards-row-1{
+  animation: anim_row 14s linear infinite;
+}
+.cards-row-2{
+  animation: anim_row 18s linear infinite;
+}
+.cards-row-3{
+  animation: anim_row 20s linear infinite;
+}
+.cards-row-4{
+  animation: anim_row 16s linear infinite;
+}
+.cards-row-5{
+  animation: anim_row 18s linear infinite;
 }
 
 /* Стилі для карток */
 .card {
-  /* Додайте стилі карток за потреби */
+  filter: blur(4px);
 }
 
 /* Зображення всередині карток */
@@ -36,7 +54,7 @@
 }
 
 /* Анімація руху вверх */
-@keyframes moveUp {
+@keyframes anim_row {
   0% {
     transform: translateX(0);
   }
