@@ -1,0 +1,46 @@
+.cards-wrapper {
+  perspective: 1000px;
+  position: relative;
+  top: -600px;
+}
+
+.cards-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3vw;
+  transform: rotateY(30deg) rotateX(29deg); /* Додає обертання контейнера по обох осях */
+  transform-style: preserve-3d; /* Забезпечує 3D ефект для дочірніх елементів */
+  width: 200vw; /* Додає ширину, щоб контейнер містив усі елементи */
+  height: 200vh; /* Додає висоту, щоб контейнер містив усі елементи */
+}
+
+/* Ряд карток */
+.cards-row {
+  width: 300vw; /* Встановлює ширину рядків */
+  display: flex;
+  gap: 1vw;
+  animation: moveUp 10s linear infinite;
+  transform-style: preserve-3d; /* Забезпечує 3D ефект для дочірніх елементів */
+}
+
+/* Стилі для карток */
+.card {
+  /* Додайте стилі карток за потреби */
+}
+
+/* Зображення всередині карток */
+.card img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Анімація руху вверх */
+@keyframes moveUp {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100vw);
+  }
+}
